@@ -8,13 +8,15 @@ import LogoutMenu from './LogoutMenu';
 import { useParams } from 'react-router-dom';
 
 function Profile() {
+  // /settings/update-avatar (uploadedFile)
   const authedUser = useSelector(state => state.user);
   const [notAuthedUser, setNotAuthedUser] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
   const [statusChanging, setStatusChanging] = useState(false);
   const [status, setStatus] = useState("");
   const params = useParams();
-  
+  const [changingAvatar, setChangingAvatar] = useState(false);
+  const [avatar, setAvatar] = useState();
 
   useEffect(() => {
       $api.get('https://meetins.herokuapp.com/profile/my-profile')
@@ -37,9 +39,28 @@ function Profile() {
   }, [])
 
 
-
+  const changeAvatar = () => {
+    setStatusChanging(false);
+    setChangingAvatar(true);
+  }
   const changeStatus = () => {
+    setChangingAvatar(false);
     setStatusChanging(true);
+    
+  }
+  const getFileForAvatar = () => {
+    console.log(avatar[0]);
+    let formData = new FormData();
+    formData.append('uploadedFile', avatar[0]);
+
+    $api.post("https://meetins.herokuapp.com/settings/update-avatar", formData)
+    .then((response) => {
+      authedUser.avatar = response.data.avatar;
+      setChangingAvatar(false);
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
   const saveStatus = () => {
     let object = {
@@ -70,6 +91,16 @@ function Profile() {
           </div>
           <div className="change_status">
             <button onClick={() => changeStatus()}>Сменить статус</button>
+            <button onClick={() => changeAvatar()}>Сменить фото</button>
+            {changingAvatar ? (
+              <div>
+                  <input type = "file" onChange={(e) => setAvatar(e.target.files)}/>
+                  <button type = "submit" onClick={() => getFileForAvatar()}>Сохранить фото</button>
+              </div>
+            )
+            : (
+              <div></div>
+            )}
             {statusChanging ? (
             <div className="change_status_block">
               <input onChange={(e) => setStatus(e.target.value)} type="text" placeholder = "Ваш новый статус"/>
