@@ -1,0 +1,120 @@
+.profile {
+    display: grid;
+    grid-template-columns: 1fr;
+    
+    & .send_message_button {
+        margin-top: 10px;
+
+        & button {
+            width: 150px;
+            height: 30px;
+            border: 1px solid blueviolet;
+            color: white;
+            background-color: blueviolet;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        
+    }
+    & h1 {
+        margin-left: 5vw;
+    }
+    & .user_avatar {
+        width: 800px;
+        border: 1px solid grey;
+        margin-left: 5vw;
+        padding: 2%;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        margin-bottom: 30px;
+
+        & img {
+            height: 200px;
+            width: 200px;
+            border: 1px solid grey;
+        }
+    }
+    & .user_info {
+        display: grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        width: 800px;
+        border: 1px solid grey;
+        margin-left: 5vw;
+        padding: 2%;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+        & .status {
+            width: 700px;
+            margin-bottom: 20px;
+        }
+    }
+    & .userName {
+        font-size: 25px;
+
+    }
+    & .change_status {
+
+        & button {
+            width: 150px;
+            height: 30px;
+            border-radius: 0px;
+            border: 1px solid crimson;
+            color: white;
+            background-color: crimson;
+
+            &:hover {
+                cursor: pointer;
+                background-color: greenyellow;
+                color: black;
+                border: 1px solid greenyellow;
+            }
+        }
+
+        & input {
+            width: 200px;
+            height: 40px;
+            margin-right: 10px;
+            margin-top: 10px;
+            font-size: 15px;
+        }
+    }   
+}
+
+@media (max-width: 900px) {
+    .profile {
+        & .user_avatar {
+            width: 500px;
+        }
+        & .user_info {
+            width: 500px;
+
+            & .status {
+                width: 300px;
+            }
+        }
+    }
+}
+@media (max-width: 587px) {
+    .profile {
+        
+        & button {
+            margin-top: 10px;
+        }
+        h1 {
+            text-align: center;
+        }
+        & .user_avatar {
+            width: 300px;
+            text-align: center;
+        }
+        & .user_info {
+            width: 300px;
+
+            & .status {
+                width: 300px;
+            }
+        }
+    }
+}

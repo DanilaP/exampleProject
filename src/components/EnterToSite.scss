@@ -1,0 +1,77 @@
+.enter {
+    background-image: url('https://images.wallpaperscraft.ru/image/single/les_nebo_tuman_gory_110519_3840x2160.jpg');
+    background-size: cover;
+    height: 100vh;
+
+
+    & .enter_menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+        align-items: center;
+        height: 500px;
+        width: 500px;
+        border-radius: 20px;
+        background-color: rgba($color: #000000, $alpha: 0.6);
+        margin: 100px auto;
+
+        & button {
+            width: 200px;   
+            height: 40px;
+            margin-top: 10px;
+            border: 0px;
+            border-radius: 0px;
+            background-color: rgb(213, 147, 60);
+            font-size: 15px;
+            color: black;
+
+            &:hover {
+                cursor: pointer;
+                color: rgb(122, 10, 10);
+            }
+        }
+
+        & .enter_data {
+            display: flex;
+            flex-direction: column;
+        }
+    
+        & .enter_buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            justify-content: center;
+            align-items: center;
+            justify-items: center;
+        }
+    
+        & input {
+            height: 30px;
+            width: 200px;
+            border: 0px;
+            background-color: white;
+            margin-top: 10px;
+            font-family: 'PT Sans Narrow', sans-serif;
+            font-size: 20px;
+        }
+        & input:focus {
+            border-bottom: 3px solid yellowgreen;
+            outline: 0;
+        }
+    }
+}
+@media (max-width: 525px) {
+    .enter {
+        & .enter_menu {
+            width: 400px;
+        }
+    }
+}
+@media (max-width: 425px) {
+    .enter {
+        & .enter_menu {
+            width: 300px;
+            height: 300px;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+.clock-loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid var(--clock-color);
+    border-radius: 50%;
+    background-color: black;
+    width: 20px;
+    height: 20px;
+    margin-left: 200px;
+    margin-top: 200px;
+}
