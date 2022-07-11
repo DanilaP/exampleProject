@@ -1,6 +1,7 @@
 import './LogoutMenu.scss';
 import { useNavigate } from 'react-router-dom';
 import {useSelector}from 'react-redux';
+import $api from './axios';
 
 function LogoutMenu() {
   const history = useNavigate();
@@ -14,8 +15,13 @@ function LogoutMenu() {
     history("/peoples");
   }
   const goToProfile  = () => {
-    history("/profile/" + selector.login);
-    console.log(selector)
+    $api.get('https://meetins.herokuapp.com/profile/my-profile')
+      .then((response) => {
+        history("/profile/" + response.data.login);
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
   return (
     <div className="LogoutMenu">

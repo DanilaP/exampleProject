@@ -1,6 +1,6 @@
 .LogoutMenu {
     display: flex;
-    background-color: rgba($color: #000000, $alpha: 0.6);
+    background-color: rgba($color: #000000, $alpha: 0.8);
     justify-content: right;
 
     & button {
@@ -14,7 +14,7 @@
 
         &:hover {
             cursor: pointer;
-            color: rgb(0, 0, 0);
+            color: rgb(222, 214, 214);
         }
     }
 }

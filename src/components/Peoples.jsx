@@ -14,9 +14,26 @@ function Peoples() {
   const [partOfUsers, setPartOfUsers] = useState([]);
 
   const goToUserProfile = (el) => {
+    console.log(el)
     store.dispatch({type: 'NOT_AUTHED_USER', value: el});
     history("/profile/" + el.login)
   }
+  const sortUsersByGender = (value) => {
+      $api.get('https://meetins.herokuapp.com/users/getUserList')
+      .then((response) => {
+        setPartOfUsers(response.data);
+        if (value == ("М")) {
+          setPartOfUsers(response.data.filter(el => el.gender == ("М" || "male"))); 
+        }
+        else if (value == ("Ж")) {
+          setPartOfUsers(response.data.filter(el => el.gender == ("female" || "Ж"))); 
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+
 
   useEffect(() => {
     $api.get('https://meetins.herokuapp.com/users/getUserList')
@@ -33,7 +50,7 @@ function Peoples() {
   useEffect(() => {
     const scrollHandler = (event) => {
         if (event.target.documentElement.scrollHeight - (event.target.documentElement.scrollTop + window.innerHeight)<100) {
-            while(partOfUsers.length !== selector.length){
+            if (partOfUsers.length !== selector.length) {
               setPartOfUsers((partOfUsers) => selector.slice(0, partOfUsers.length+5));
             }
         }
@@ -45,12 +62,19 @@ function Peoples() {
   }, [selector])
 
   useEffect(() => {
-    console.log(partOfUsers)
+    //console.log(partOfUsers)
   }, [partOfUsers])
 
   return (
     <div className="Peoples">
     <LogoutMenu/>
+    <div className="sort_menu">
+    <select onChange={(e) => sortUsersByGender(e.target.value)}>
+      <option value={"ALL"}>Все люди</option>
+      <option value={"М"}>Мужской пол</option>
+      <option value={"Ж"}>Женский пол</option>
+    </select>
+    </div>
     <div className='all_users'>
       {partOfUsers.map((el) => 
         <div onClick={() => goToUserProfile(el)} className='user'>
