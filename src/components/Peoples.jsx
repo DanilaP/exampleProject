@@ -23,10 +23,10 @@ function Peoples() {
       .then((response) => {
         setPartOfUsers(response.data);
         if (value == ("М")) {
-          setPartOfUsers(response.data.filter(el => el.gender == ("М" || "male"))); 
+          setPartOfUsers(response.data.filter(el => (el.gender == "М") || (el.gender =="male"))); 
         }
         else if (value == ("Ж")) {
-          setPartOfUsers(response.data.filter(el => el.gender == ("female" || "Ж"))); 
+          setPartOfUsers(response.data.filter(el => (el.gender == "Ж") || (el.gender =="female"))); 
         }
       })
       .catch((error) => {
