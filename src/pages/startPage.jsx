@@ -22,7 +22,10 @@ function StartPage() {
             gender: userGender, 
             city: userTown,
         }
-        if ((user.name && user.email && user.password && user.gender && user.city) !== ''){
+        let rule = /^[\w-\.]+@[\w-]+\.[a-z]{2,4}$/i;
+        let validemail = rule.test(user.email);
+
+        if ((user.name && user.email && user.password && user.gender && user.city) !== '' && validemail === true && user.name.length >=2){
             await $api.post('https://meetins.herokuapp.com/auth/registration', user)
             .then((response) => {
                 store.dispatch({type: 'SET_USER', value: response.data.profile.user});
@@ -33,7 +36,7 @@ function StartPage() {
                 console.log(error);
             })
         } else {
-            return;
+            return
         }
     }
     const changeGender = (gender) => {
